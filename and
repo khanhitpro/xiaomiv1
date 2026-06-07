@@ -16,7 +16,7 @@ trap '$ADB_COMMAND disconnect >/dev/null 2>&1; exit' INT TERM
 print_header() {
     clear
     echo -e "${GREEN}========================================================${NC}"
-    echo -e "${GREEN}           Trình cài đặt S.Mihome 0946.018.018          ${NC}"
+    echo -e "${GREEN}       Trình cài đặt Khánh Xiaomi 0967.341.608          ${NC}"
     echo -e "${GREEN}========================================================${NC}"
     echo
 }
@@ -51,10 +51,10 @@ menu1() {
     while true; do
         print_header
         echo "Bật ADB Debugging trên TV Xiaomi"
-        echo "TV & iPhone phải cùng Wi-Fi"
+        echo "TV & Điện thoại phải cùng Wi-Fi"
         echo
 
-        read -p "Nhập IP TV (vd: 192.168.1.100): " RAW_IP
+        read -p "Nhập IP TV: " RAW_IP
         [ -z "$RAW_IP" ] && continue
 
         DEVICE_IP="${RAW_IP}:5555"
@@ -97,8 +97,8 @@ menu2() {
         echo -e "TV đang kết nối tại: ${GREEN}$DEVICE_IP${NC}"
         echo
         echo "-- Cài đặt giao diện --"
-        echo "1. Cài Launcher PROJECTIVY"
-        echo "2. CÀI TIVI ANDROI 2026"
+        echo "1. Cài Launcher PROJECTIVY 9-11"
+        echo "2. Cài Launcher PROJECTIVY 14 2026"
         echo "3. Cài đặt tất cả ứng dụng (.apk) từ thư mục"
         echo "4. Chép tất cả ảnh nền (.jpg, .png) vào TV"
         echo "5. Khởi động lại TV (Reboot)"
@@ -129,19 +129,17 @@ menu2() {
 
 # 1. Cài đặt Projectivy Launcher và các app đi kèm
 install_projectivy() {
-    for cmd in \
-        "service call alarm 3 s16 Asia/Bangkok" \
-        "settings put global device_locales vi-VN" \
-        "settings put global sys_locale vi-VN" \
-        "system system_locales vi-VN" \
-        "settings put global heads_up_notifications_enabled 0" \
-        "settings put global stay_on_while_plugged_in 3" \
-        "settings put global window_animation_scale 0.5" \
-        "settings put global transition_animation_scale 0.5" \
-        "settings put global animator_duration_scale 0.5"
-    do
-        $ADB_COMMAND shell "$cmd" >/dev/null 2>&1
-    done
+   echo "🚀 Đang cài giao diện tiếng Việt Project Android 9-11..."
+   $ADB_COMMAND shell service call alarm 3 s16 Asia/Bangkok >/dev/null 2>&1
+   $ADB_COMMAND shell settings put global device_locales vi-VN >/dev/null 2>&1
+   $ADB_COMMAND shell settings put global sys_locale vi-VN >/dev/null 2>&1
+   $ADB_COMMAND shell settings put system system_locales vi-VN >/dev/null 2>&1
+   $ADB_COMMAND shell settings put global heads_up_notifications_enabled 0 >/dev/null 2>&1
+   $ADB_COMMAND shell settings put global stay_on_while_plugged_in 3 >/dev/null 2>&1
+   $ADB_COMMAND shell settings put global window_animation_scale 1 >/dev/null 2>&1
+   $ADB_COMMAND shell settings put global transition_animation_scale 1 >/dev/null 2>&1
+   $ADB_COMMAND shell settings put global animator_duration_scale 1 >/dev/null 2>&1
+
 
     echo "🚀 Bắt đầu cài đặt Projectivy Launcher..."
     echo "Đang chạy p.apk ..." >/dev/null 2>&1
@@ -166,14 +164,14 @@ install_projectivy() {
         $ADB_COMMAND shell pm uninstall --user 0 "$app" >/dev/null 2>&1
     done
 
-    local apks_to_install="mstore.apk keyboard.apk katniss_2.2.0.apk dl.apk quantv.apk an.apk youtube.apk cotivi.apk imedia.apk"
+    local apks_to_install="mistore.apk keyboard.apk katniss_2.2.0.apk allapp.apk down.apk mitv.apk an.apk youtube.apk phim4k.apk getout.apk"
 
     echo "🚀 Bắt đầu cài đặt các ứng dụng phụ trợ..."
     for apk in $apks_to_install; do
         install_apk "$apk"
     done
     
-    $ADB_COMMAND push projectivy.plbackup /sdcard/Download >/dev/null 2>&1
+    $ADB_COMMAND push 470.plbackup /sdcard/Download >/dev/null 2>&1
 
     copy_wallpapers
     # Cấp quyền nâng cao cho ứng dụng
@@ -184,7 +182,7 @@ install_projectivy() {
     local appops_perms="REQUEST_INSTALL_PACKAGES WRITE_SETTINGS MANAGE_EXTERNAL_STORAGE"
     local runtime_perms="android.permission.READ_EXTERNAL_STORAGE android.permission.WRITE_EXTERNAL_STORAGE android.permission.READ_MEDIA_IMAGES android.permission.READ_MEDIA_VIDEO android.permission.READ_MEDIA_AUDIO"
 
-    echo -e "${YELLOW}🔑 BƯỚC 5: ĐANG CẤP QUYỀN ỨNG DỤNG...${NC}"
+    echo -e "${YELLOW}🔑 ĐANG CẤP QUYỀN ỨNG DỤNG...${NC}"
 
     # Đếm tổng số lượng app trong danh sách chuẩn POSIX
     local total_apps=0
@@ -303,20 +301,16 @@ install_projectivy() {
 
 # 2. Cài đặt X S 2026 và các app đi kèm
 install_X_S_2026() {
-    for cmd in \
-        "service call alarm 3 s16 Asia/Bangkok" \
-        "settings put global device_locales vi-VN" \
-        "settings put global sys_locale vi-VN" \
-        "system system_locales vi-VN" \
-        "settings put global heads_up_notifications_enabled 0" \
-        "settings put global stay_on_while_plugged_in 3" \
-        "settings put global window_animation_scale 0.5" \
-        "settings put global transition_animation_scale 0.5" \
-        "settings put global animator_duration_scale 0.5"\
-        "appops set com.xiaomi.voicecontrol SYSTEM_ALERT_WINDOW deny"
-    do
-        $ADB_COMMAND shell "$cmd" >/dev/null 2>&1
-    done
+   echo "🚀 Đang cài giao diện tiếng Việt Project Android 14..."
+   $ADB_COMMAND shell service call alarm 3 s16 Asia/Bangkok >/dev/null 2>&1
+   $ADB_COMMAND shell settings put global device_locales vi-VN >/dev/null 2>&1
+   $ADB_COMMAND shell settings put global sys_locale vi-VN >/dev/null 2>&1
+   $ADB_COMMAND shell settings put system system_locales vi-VN >/dev/null 2>&1
+   $ADB_COMMAND shell settings put global heads_up_notifications_enabled 0 >/dev/null 2>&1
+   $ADB_COMMAND shell settings put global stay_on_while_plugged_in 3 >/dev/null 2>&1
+   $ADB_COMMAND shell settings put global window_animation_scale 1 >/dev/null 2>&1
+   $ADB_COMMAND shell settings put global transition_animation_scale 1 >/dev/null 2>&1
+   $ADB_COMMAND shell settings put global animator_duration_scale 1 >/dev/null 2>&1
 
     echo "🚀 Bắt đầu cài đặt Projectivy Launcher..."
     echo "Đang chạy p.apk ..." >/dev/null 2>&1
@@ -337,14 +331,14 @@ install_X_S_2026() {
         $ADB_COMMAND shell pm disable-user --user 0 "$app" >/dev/null 2>&1
     done
 
-    local apks_to_install="mstore.apk keyboard.apk katniss_2.2.0.apk dl.apk quantv.apk an.apk youtube.apk cotivi.apk imedia.apk"
+    local apks_to_install="mistore.apk keyboard.apk katniss_2.2.0.apk allapp.apk down.apk mitv.apk an.apk youtube.apk phim4k.apk getout.apk"
 
     echo "🚀 Bắt đầu cài đặt các ứng dụng phụ trợ..."
     for apk in $apks_to_install; do
         install_apk "$apk"
     done
     
-    $ADB_COMMAND push projectivy.plbackup /sdcard/Download >/dev/null 2>&1
+    $ADB_COMMAND push 470.plbackup /sdcard/Download >/dev/null 2>&1
 
     copy_wallpapers
     # Cấp quyền nâng cao cho ứng dụng
@@ -355,7 +349,7 @@ install_X_S_2026() {
     local appops_perms="REQUEST_INSTALL_PACKAGES WRITE_SETTINGS MANAGE_EXTERNAL_STORAGE"
     local runtime_perms="android.permission.READ_EXTERNAL_STORAGE android.permission.WRITE_EXTERNAL_STORAGE android.permission.READ_MEDIA_IMAGES android.permission.READ_MEDIA_VIDEO android.permission.READ_MEDIA_AUDIO"
 
-    echo -e "${YELLOW}🔑 BƯỚC 5: ĐANG CẤP QUYỀN ỨNG DỤNG...${NC}"
+    echo -e "${YELLOW}🔑 ĐANG CẤP QUYỀN ỨNG DỤNG...${NC}"
 
     # Đếm tổng số lượng app trong danh sách chuẩn POSIX
     local total_apps=0
@@ -407,7 +401,7 @@ install_X_S_2026() {
     printf "\r%100s\r" " "
     echo -e "${GREEN}✅ Đã cấp quyền và đồng bộ hóa $total_apps ứng dụng!${NC}"
 
-    echo -e "${CYAN}⚙️ BƯỚC 6: THIẾT LẬP HỆ THỐNG NÂNG CAO (A14)...${NC}"
+    echo -e "${CYAN}⚙️  THIẾT LẬP HỆ THỐNG NÂNG CAO (A14)...${NC}"
 
     # Định nghĩa chuỗi chứa các lệnh cấu hình đặc biệt cho TV (mỗi lệnh cách nhau bằng dấu sổ đứng |)
     local list_xs_a14="cmd package clear-app-profiles com.mitv.tvhome|\
