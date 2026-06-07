@@ -131,7 +131,7 @@ menu2() {
         echo -e "${CYAN}🆔 Seri Tivi ${SERIAL}${NC}"
         echo -e "${YELLOW}────────────────────────────────────────${NC}"
         echo
-        echo -e "${MAGENTA}📋 CÀI ĐẶT GIAO DIỆN TIVI${NC}"
+        echo -e "${MAGENTA}📋 MENU CÀI ĐẶT GIAO DIỆN TIVI${NC}"
         echo
         echo -e "${CYAN}[- 1]${NC} 🚀 Cài Launcher ${GREEN}PROJECTIVY 9-11${NC}"
         echo -e "${CYAN}[- 2]${NC} 🚀 Cài Launcher ${GREEN}PROJECTIVY 14 2026${NC}"
