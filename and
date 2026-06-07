@@ -28,6 +28,8 @@ print_header() {
     echo
     echo -e "${CYAN}🚀 TRÌNH CÀI TIVI XIAOMI BY KHÁNH IT${NC}"
     echo -e "${GREEN}📞 Hotline: 0967.341.608${NC}"
+    echo -e "${WHITE}📦  Phiên bản: 4.70${NC}"
+    echo -e "${WHITE}⚠️ Bản Cập Nhật: 06-06-2026${NC}"
     echo
 }
 
@@ -61,9 +63,6 @@ menu1() {
     while true; do
         print_header
 		echo -e "${BLUE}📡 MENU KẾT NỐI TIVI XIAOMI PRO${NC}"
-        echo -e "${WHITE}👨‍💻 Khánh IT | ☎ 0967.341.608${NC}"
-        echo -e "${WHITE}📦    Phiên bản: 4.70${NC}"
-        echo -e "${WHITE}⚠️ Bản Cập Nhật: 06-06-2026${NC}"
 
         echo -e "${BLUE}────────────────────────────${NC}"
         echo ""
@@ -71,15 +70,14 @@ menu1() {
         echo -e "${CYAN}🎮 Điều khiển:${NC} ${YELLOW}↑ lên trên cùng${NC} → ${WHITE}Cài đặt ⚙${NC}"
         echo -e "${CYAN}🌐 Ngôn ngữ :${NC} ${YELLOW}↓ 4 lần${NC} → ${WHITE}Language${NC} → ${GREEN}English${NC}"
         echo -e "${CYAN}🔓 Developer:${NC} ${WHITE}About${NC} → ${YELLOW}Model${NC} → ${GREEN}OK 9 lần${NC}"
-        echo -e "${CYAN}⚙️ Quyền    :${NC} ${GREEN}ADB Debugging${NC} + ${GREEN}Unknown Sources${NC}"
+        echo -e "${CYAN}⚙️  Quyền    :${NC} ${GREEN}ADB Debugging${NC} + ${GREEN}Unknown Sources${NC}"
         echo -e "${CYAN}⛔ Lưu ý    :${NC} ${RED}Tắt Update tự động${NC}"
         echo -e "${CYAN}📶 Thiết bị :${NC} ${YELLOW}${DEVICE_IP}${NC} | ${GREEN}Android ${ANDROID}${NC}"
         echo ""
         echo -e "${BLUE}────────────────────────────${NC}"
         echo
-        echo "Bật ADB Debugging trên TV Xiaomi"
-        echo "TV & Điện thoại phải cùng Wi-Fi"
-        read -p "Nhập IP TV: " RAW_IP
+        read -p "$(echo -e "${GREEN}📶 Kết nối TV ${WHITE}|${NC} ${YELLOW}Nhập IP:${NC} ")" RAW_IP
+
         [ -z "$RAW_IP" ] && continue
 
         DEVICE_IP="${RAW_IP}:5555"
@@ -105,10 +103,10 @@ menu1() {
             PANEL=$($ADB_COMMAND shell getprop ro.boot.mi.panel_size 2>/dev/null | tr -d '\r')
             SERIAL=$($ADB_COMMAND shell getprop ro.serialno | tr -d '\r')
 
-            echo -e "${YELLOW}────────────────────────────────────────${NC}"
-            echo -e "${CYAN}📱 ${BRAND} ${MODEL}${NC} | 📺 ${PANEL:-N/A}"
+		    echo -e "${YELLOW}────────────────────────────────────────${NC}"
+            echo -e "${CYAN}📱 ${BRAND} ${MODEL}${NC} | 📺Tivi ${PANEL:-N/A}Inch"
             echo -e "${CYAN}🤖 Android ${ANDROID} (API ${SDK})${NC} | ⚙️ ${BUILD}"
-            echo -e "${CYAN}🆔 ${SERIAL}${NC}"
+            echo -e "${CYAN}🆔 Seri Tivi ${SERIAL}${NC}"
             echo -e "${YELLOW}────────────────────────────────────────${NC}"
 
             sleep 3
@@ -125,27 +123,27 @@ menu1() {
 menu2() {
     while true; do
         print_header
-        echo -e "TV đang kết nối tại: ${GREEN}$DEVICE_IP${NC}"
+        echo -e "📱 TV đang kết nối tại: ${GREEN}$DEVICE_IP${NC}"
         echo
 		echo -e "${YELLOW}────────────────────────────────────────${NC}"
-        echo -e "${CYAN}📱 ${BRAND} ${MODEL}${NC} | 📺 ${PANEL:-N/A}"
+        echo -e "${CYAN}📱 ${BRAND} ${MODEL}${NC} | 📺Tivi ${PANEL:-N/A}Inch"
         echo -e "${CYAN}🤖 Android ${ANDROID} (API ${SDK})${NC} | ⚙️ ${BUILD}"
-        echo -e "${CYAN}🆔 ${SERIAL}${NC}"
+        echo -e "${CYAN}🆔 Seri Tivi ${SERIAL}${NC}"
         echo -e "${YELLOW}────────────────────────────────────────${NC}"
         echo
         echo -e "${MAGENTA}📋 CÀI ĐẶT GIAO DIỆN TIVI${NC}"
         echo
-        echo -e "${CYAN}[1]${NC} 🚀 Cài Launcher ${GREEN}PROJECTIVY 9-11${NC}"
-        echo -e "${CYAN}[2]${NC} 🚀 Cài Launcher ${GREEN}PROJECTIVY 14 2026${NC}"
-        echo -e "${CYAN}[3]${NC} 📦 Cài tất cả ứng dụng ${YELLOW}(.apk)${NC} lên TV"
-        echo -e "${CYAN}[4]${NC} 🖼️ Chép tất cả ảnh nền ${YELLOW}(.jpg, .png)${NC} vào TV"
-        echo -e "${CYAN}[5]${NC} 🔄 Khởi động lại TV"
-        echo -e "${CYAN}[6]${NC} ⚠️ ${RED}Khởi động vào XOÁ SẠCH DỮ LIỆU TIVI${NC}"
-        echo -e "${CYAN}[7]${NC} ↩️ Quay lại menu kết nối"
-        echo -e "${CYAN}[8]${NC} 🔓 Xin quyền ${GREEN}PROJECTIVY 14 2026${NC}"
-        echo -e "${CYAN}[0]${NC} ❌ Thoát"
+        echo -e "${CYAN}[- 1]${NC} 🚀 Cài Launcher ${GREEN}PROJECTIVY 9-11${NC}"
+        echo -e "${CYAN}[- 2]${NC} 🚀 Cài Launcher ${GREEN}PROJECTIVY 14 2026${NC}"
+        echo -e "${CYAN}[- 3]${NC} 📦 Cài tất cả ứng dụng ${YELLOW}(.apk)${NC} lên TV"
+        echo -e "${CYAN}[- 4]${NC} 🖼️ Chép tất cả ảnh nền ${YELLOW}(.jpg, .png)${NC} vào TV"
+        echo -e "${CYAN}[- 5]${NC} 🔄 Khởi động lại TV"
+        echo -e "${CYAN}[- 6]${NC} ⚠️ ${RED}Khởi động vào XOÁ SẠCH DỮ LIỆU TIVI${NC}"
+        echo -e "${CYAN}[- 7]${NC} ↩️  Quay lại menu kết nối"
+        echo -e "${CYAN}[- 8]${NC} 🔓 Xin quyền ${GREEN}PROJECTIVY 14 2026${NC}"
+        echo -e "${CYAN}[- 0]${NC} ❌ Thoát"
         echo
-        read -p "→ Nhập tùy chọn của bạn [0-8]: " CHOICE
+        read -p "🔄 → Nhập tùy chọn của bạn [0-8]: " CHOICE
 
         case $CHOICE in
             1) install_projectivy ;;
@@ -166,18 +164,16 @@ menu2() {
 
 # 1. Cài đặt Projectivy Launcher và các app đi kèm
 install_projectivy() {
-   echo "🚀 Đang cài giao diện tiếng Việt Project Android 9-11..."
-   $ADB_COMMAND shell service call alarm 3 s16 Asia/Bangkok >/dev/null 2>&1
-   $ADB_COMMAND shell settings put global device_locales vi-VN >/dev/null 2>&1
-   $ADB_COMMAND shell settings put global sys_locale vi-VN >/dev/null 2>&1
-   $ADB_COMMAND shell settings put system system_locales vi-VN >/dev/null 2>&1
-   $ADB_COMMAND shell settings put global heads_up_notifications_enabled 0 >/dev/null 2>&1
-   $ADB_COMMAND shell settings put global stay_on_while_plugged_in 3 >/dev/null 2>&1
-   $ADB_COMMAND shell settings put global window_animation_scale 1 >/dev/null 2>&1
-   $ADB_COMMAND shell settings put global transition_animation_scale 1 >/dev/null 2>&1
-   $ADB_COMMAND shell settings put global animator_duration_scale 1 >/dev/null 2>&1
-
-
+    echo -e "${YELLOW}📦 Đang cài đặt ${GREEN}Projectivy Launcher${YELLOW} cho Android ${WHITE}9-11${YELLOW}...${NC}"
+    $ADB_COMMAND shell service call alarm 3 s16 Asia/Bangkok >/dev/null 2>&1
+    $ADB_COMMAND shell settings put global device_locales vi-VN >/dev/null 2>&1
+    $ADB_COMMAND shell settings put global sys_locale vi-VN >/dev/null 2>&1
+    $ADB_COMMAND shell settings put system system_locales vi-VN >/dev/null 2>&1
+    $ADB_COMMAND shell settings put global heads_up_notifications_enabled 0 >/dev/null 2>&1
+    $ADB_COMMAND shell settings put global stay_on_while_plugged_in 3 >/dev/null 2>&1
+    $ADB_COMMAND shell settings put global window_animation_scale 1 >/dev/null 2>&1
+    $ADB_COMMAND shell settings put global transition_animation_scale 1 >/dev/null 2>&1
+    $ADB_COMMAND shell settings put global animator_duration_scale 1 >/dev/null 2>&1
     echo "🚀 Bắt đầu cài đặt Projectivy Launcher..."
     echo "Đang chạy p.apk ..." >/dev/null 2>&1
     install_apk "p.apk" >/dev/null 2>&1
